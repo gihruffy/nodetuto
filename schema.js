@@ -1,32 +1,30 @@
 'use strict';
-const mongoose = require('mongoose');
 
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const name = require('./fields-name');
+const description = require('./fields-description');
+const type = require('./fields-type');
+const attack = require('./fields-attack');
+const defense = require('./fields-defense');
+const created_at = require('./fields-created_at');
+
 //Objecto que será passado ao schema contendo as propriedadas para validação
 let _schema = {
-	nome: String,
-	idade: Number
+	name,
+	description,
+	type,
+	attack,
+	defense,
+	created_at
 }
 
-const pessoaSchema =  new Schema(_schema);
+const pokemonSchema =  new Schema(_schema);
 
-//Dados a ser inseridos no banco
-const data = {
-	nome: "Giovanni",
-	idade: 27
-};
+module.exports =  pokemonSchema;
 
-//Criando um model 
-//Passando a coleção que será salva e o schema para validacao
-const Model = mongoose.model('pessoas', pessoaSchema );
-//Instanciando o model com os dados
-const pessoa = new Model(data);	
-//Salvando os dados 
-pessoa.save(function (err, data){
-	if(err) return console.log('Erro: ', err);
-	console.log('Inseriu: ', data)
-});
 
-module.exports = pessoaSchema;
+
+
